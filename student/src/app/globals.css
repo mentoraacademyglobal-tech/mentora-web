@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+/* Colours that change with the theme. Light is the default; dark follows the device unless the person chose. */
+:root {
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --ink: #062a35;
+  --mut: #4a6470;
+  --row: #eaf0f4;
+  --line: #dbe4ea;
+  --field: #8fa5b0;
+  --track: #e3eaef;
+  --side: #062a35;
+  --danger: #8a1f1f;
+  --danger-soft: #fdecec;
+  --success: #0b6b46;
+  --success-soft: #e6faf2;
+  --info: #1e3a8a;
+  --info-soft: #e8f0fe;
+  --warn: #6b4b00;
+  --warn-soft: #fff4d6;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+  --bg: #04181f;
+  --card: #0b2f3b;
+  --ink: #eaf4f7;
+  --mut: #9bbac5;
+  --row: #0f3846;
+  --line: #14485a;
+  --field: #3d6676;
+  --track: #14485a;
+  --side: #0b2f3b;
+  --danger: #ffb4b4;
+  --danger-soft: #3a1618;
+  --success: #6df0b8;
+  --success-soft: #0f3a2c;
+  --info: #bcd5ff;
+  --info-soft: #12345a;
+  --warn: #ffe29a;
+  --warn-soft: #3d3210;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #04181f;
+  --card: #0b2f3b;
+  --ink: #eaf4f7;
+  --mut: #9bbac5;
+  --row: #0f3846;
+  --line: #14485a;
+  --field: #3d6676;
+  --track: #14485a;
+  --side: #0b2f3b;
+  --danger: #ffb4b4;
+  --danger-soft: #3a1618;
+  --success: #6df0b8;
+  --success-soft: #0f3a2c;
+  --info: #bcd5ff;
+  --info-soft: #12345a;
+  --warn: #ffe29a;
+  --warn-soft: #3d3210;
+  color-scheme: dark;
+}
+
+@theme inline {
+  /* Follow the theme */
+  --color-page: var(--bg);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-slate-text: var(--mut);
+  --color-mist: var(--row);
+  --color-line: var(--line);
+  --color-field: var(--field);
+  --color-track: var(--track);
+  --color-side: var(--side);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+
+  /* Brand colours that stay the same in both themes */
+  --color-deep: #062a35;
+  --color-deep-mut: #a9c2cc;
+  --color-mint: #19e69a;
+  --color-azure: #3b82f6;
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* The window the portal sits in, on a wide screen. */
+.portal-backdrop {
+  background: linear-gradient(135deg, #0b4257, #062a35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Student experience v2: shared visual language with the Mentora Manager shell. */
+.student-shell-outer { background: radial-gradient(circle at 50% -30%, #13566a, #073340 70%); }
+.student-shell { box-shadow: 0 22px 70px rgba(0, 20, 30, .24); }
+.student-content { background: var(--bg); scrollbar-gutter: stable; }
+.student-sidebar,.student-brand-rail { scrollbar-width: thin; }
+.student-nav-scroll { scrollbar-width: thin; scrollbar-color: #295363 transparent; }
+.student-nav-link { text-decoration: none; }
+.student-topbar { min-height: 72px; }
+.student-card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 2px 8px rgba(8,40,50,.025); }
+.student-card-hover { transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+.student-card-hover:hover { transform: translateY(-2px); border-color: #19e69a99; box-shadow: 0 12px 28px rgba(6,42,53,.075); }
+.student-kicker { color: #0b9d75; font-size: 10px; font-weight: 850; letter-spacing: .15em; }
+.student-chip { display:inline-flex; align-items:center; border:1px solid var(--line); background: var(--bg); color: var(--mut); border-radius: 999px; padding: 6px 10px; font-weight: 700; font-size: 11px; }
+.student-action { display:inline-flex; justify-content:center; align-items:center; gap:8px; padding: 10px 14px; border-radius: 11px; font-size: 12px; font-weight: 800; white-space: nowrap; transition: opacity .15s, transform .15s; }
+.student-action:hover { opacity:.9; transform:translateY(-1px); }
+.student-action-primary { background: #19e69a; color: #062a35; }
+.student-action-secondary { border:1px solid var(--line); background:var(--card); color:var(--ink); }
+.student-metric { border:1px solid var(--line); border-radius:16px; padding:19px 20px; background:var(--card); min-width:0; }
+.student-metric-value { font-size: clamp(25px,2.7vw,31px); font-weight:850; letter-spacing:-.05em; color:var(--ink); line-height:1.15; }
+.student-muted { color:var(--mut); }
+.student-row { display:flex; gap:14px; align-items:center; padding:15px; border:1px solid var(--line); border-radius:13px; background:var(--card); }
+.student-row + .student-row { margin-top:9px; }
+.student-table-scroll { overflow-x:auto; border:1px solid var(--line); border-radius:14px; }
+.student-table { width:100%; border-collapse:collapse; text-align:left; }
+.student-table th { color:var(--mut); background:var(--bg); font-weight:800; text-transform:uppercase; letter-spacing:.06em; font-size:10px; white-space:nowrap; }
+.student-table th,.student-table td { padding:14px 16px; border-bottom:1px solid var(--line); }
+.student-table td { font-size:12px; }
+.student-table tr:last-child td { border-bottom:0; }
+.student-table tbody tr:hover { background:var(--bg); }
+.student-search { background:var(--card); color:var(--ink); border:1px solid var(--line); border-radius:12px; outline:none; padding:11px 13px; font-size:13px; }
+.student-search:focus { border-color:#19e69a; box-shadow:0 0 0 3px #19e69a20; }
+.student-hero { background:linear-gradient(125deg,#062a35,#083d49 75%,#075746); color:white; border-radius:20px; position:relative; overflow:hidden; }
+.student-hero:after { content:""; position:absolute; width:260px; height:260px; right:-80px; top:-140px; border-radius:50%; background:#19e69a12; pointer-events:none; }
+@media(max-width:1023px){.student-shell-outer{background:var(--bg)}.student-shell{box-shadow:none}.student-content{scrollbar-gutter:auto}}
+@media(prefers-reduced-motion:reduce){.student-card-hover,.student-action{transition:none}.student-card-hover:hover,.student-action:hover{transform:none}}
+
+/* Shared accessibility and responsive interaction baseline. */
+:where(button,a,input,select,textarea,summary,[tabindex]):focus-visible{outline:3px solid #087faf!important;outline-offset:3px!important}
+button,a,input,select,textarea{touch-action:manipulation}
+input,select,textarea{max-width:100%}
+.accessible-dialog{position:fixed;inset:0;margin:auto;border:0;padding:0;background:transparent;color:inherit;width:min(100% - 2rem,40rem);max-width:100%;max-height:calc(100dvh - 2rem);overflow:auto;overscroll-behavior:contain}
+.accessible-dialog::backdrop{background:rgb(0 20 29 / .72)}
+.accessible-dialog.drawer-dialog{margin:0 auto 0 0;width:min(320px,90vw);height:100dvh;max-height:100dvh}
+@media(pointer:coarse){button,[role=button],.nav-link,.student-action{min-height:44px}button[aria-label],a[aria-label]{min-width:44px;min-height:44px}}
+@media(max-width:760px){input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important}h1,h2,h3,p{overflow-wrap:break-word}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+.student-shell-outer{min-height:100dvh}.student-content{scroll-padding-top:1rem}.accessible-dialog>div{max-width:none!important}.accessible-dialog.drawer-dialog>aside{width:100%;max-width:100%}.student-action{min-height:44px}.student-content img{max-width:100%}
+@media(max-width:760px){.student-content{padding-bottom:max(2rem,env(safe-area-inset-bottom))}.student-content table{font-size:13px}.student-action{white-space:normal;text-align:center}}

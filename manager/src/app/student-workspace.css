@@ -1,0 +1,44 @@
+/* Mentora Phase 1 — Student management & Profile Workspace */
+.student-workspace .form-section-title h3{display:flex;align-items:center;gap:9px}
+.student-workspace .sw-actions{display:flex;justify-content:flex-end;margin-top:18px}
+.student-workspace .sw-enroll{display:flex;align-items:flex-end;gap:12px;margin:0 0 22px}
+.student-workspace .sw-enroll .form-field{flex:1}
+.student-workspace .sw-row-actions{display:flex;gap:7px;flex-wrap:wrap}
+.student-workspace .module-notice{display:flex;align-items:center;gap:8px}
+.student-workspace .sw-enroll select{width:100%;border:1px solid #d5e1e7;border-radius:10px;background:#fbfdff;padding:12px;color:var(--ink);min-height:44px}
+@media(max-width:760px){.student-workspace .sw-enroll{flex-direction:column;align-items:stretch}}
+
+/* Profile Workspace Overview Card */
+.student-workspace .sw-overview-card{background:white;border:1px solid var(--border);border-radius:18px;padding:26px 30px;margin-bottom:20px;display:flex;align-items:flex-start;gap:24px;box-shadow:0 2px 0 #dfe9ec35}
+.student-workspace .sw-avatar{width:70px;height:70px;border-radius:50%;background:linear-gradient(135deg,var(--navy),#0e4b5c);color:var(--mint);display:grid;place-items:center;font-size:28px;font-weight:900;flex-shrink:0;box-shadow:0 4px 12px #04253033}
+.student-workspace .sw-overview-info{flex:1;min-width:0}
+.student-workspace .sw-overview-info h2{font-size:24px;font-weight:800;letter-spacing:-.6px;margin:0 0 6px;color:var(--ink)}
+.student-workspace .sw-overview-info p{margin:0;color:var(--muted);font-size:12px}
+.student-workspace .sw-overview-meta{display:flex;flex-wrap:wrap;gap:14px 28px;margin-top:16px;padding-top:16px;border-top:1px solid #edf2f5}
+.student-workspace .sw-meta-item{display:flex;flex-direction:column;gap:3px}
+.student-workspace .sw-meta-item span{font-size:10px;color:var(--muted);font-weight:750;text-transform:uppercase;letter-spacing:.6px}
+.student-workspace .sw-meta-item b{font-size:12.5px;color:#183b4b}
+
+/* Reward Balance Cards */
+.student-workspace .sw-balance-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.student-workspace .sw-balance-card{background:white;border:1px solid var(--border);border-radius:16px;padding:22px 24px;box-shadow:0 2px 0 #dfe9ec35}
+.student-workspace .sw-balance-card span{font-size:11px;color:var(--muted);font-weight:750;text-transform:uppercase;letter-spacing:.6px;display:flex;align-items:center;gap:6px}
+.student-workspace .sw-balance-card b{display:block;font-size:32px;letter-spacing:-1.2px;margin-top:8px;color:#052c3c;font-weight:850}
+
+/* Account Status Box */
+.student-workspace .sw-account-status{display:flex;align-items:center;gap:16px;margin-bottom:22px;background:white;border:1px solid var(--border);border-radius:16px;padding:20px 24px}
+.student-workspace .sw-account-status p{margin:0;flex:1;font-size:12px;color:var(--muted);line-height:1.5}
+.student-workspace .sw-account-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+/* Danger Button */
+.student-workspace .btn-danger{background:#fff3f3;border-color:#f9cccc;color:#c03844}
+.student-workspace .btn-danger:hover{background:#ffe6e6;border-color:#f4b2b8}
+
+/* Field Display in Details Grid */
+.student-workspace .field-display{border:1px solid #e1ebef;border-radius:10px;background:#fafdff;padding:11px 14px;min-height:43px;display:flex;align-items:center;font-size:12.5px;color:#123746}
+
+@media(max-width:760px){
+  .student-workspace .sw-overview-card{flex-direction:column;padding:20px}
+  .student-workspace .sw-balance-cards{grid-template-columns:1fr}
+  .student-workspace .sw-account-status{flex-direction:column;align-items:flex-start}
+}

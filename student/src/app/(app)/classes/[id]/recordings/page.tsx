@@ -1,0 +1,21 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { requireUser } from "@/lib/auth";
+import { getClass, getClassAccess } from "@/features/classes";
+import { getMyProgress,listClassRecordings,matchesTopic,tagsOf,formatTimestamp } from "@/features/recordings";
+import { PageHeader,Metric,BlankState } from "@/components/ui/StudentUI";
+import Icon from "@/components/layout/Icon";
+
+export default async function ClassRecordingsPage({params,searchParams}:{params:Promise<{id:string}>;searchParams:Promise<{q?:string;topic?:string}>}){
+ const {id}=await params;const {q="",topic=""}=await searchParams;const {supabase,user}=await requireUser();
+ const [cls,access,all,progress]=await Promise.all([getClass(supabase,id),getClassAccess(supabase,user.id,id),listClassRecordings(supabase,id),getMyProgress(supabase)]);
+ if(!cls||!access.isStudent)notFound();
+ const published=all.filter(r=>r.status==="published");
+ const matches=published.filter(r=>(!q||r.title.toLowerCase().includes(q.toLowerCase()))&&(!topic||matchesTopic(r,topic)));
+ const started=published.filter(r=>(progress.get(r.id)??0)>0).length;
+ return <div className="space-y-6"><div className="flex gap-2 text-xs font-semibold text-slate-text"><Link href="/classes">My classes</Link><span>/</span><Link className="truncate" href={`/classes/${id}`}>{cls.name}</Link><span>/ Recordings</span></div><PageHeader eyebrow="LEARNING / VIDEO LIBRARY" title="Class Recordings" subtitle={`Published lesson recordings for ${cls.name}. Watch, resume and browse by syllabus topics.`} action={{href:`/classes/${id}`,label:"Class overview"}}/>
+ <div className="grid grid-cols-2 gap-3 xl:grid-cols-4"><Metric label="Published lectures" value={published.length} icon="video" detail="Available to your class"/><Metric label="Started watching" value={started} icon="play" detail="Recorded progress"/><Metric label="Matching search" value={matches.length} icon="search" detail="Filtered archive"/><Metric label="Syllabus" value="Tagged" icon="book" detail="Where assigned by tutors"/></div>
+ <form action={`/classes/${id}/recordings`} className="student-card flex flex-col gap-3 p-4 sm:flex-row"><input name="q" aria-label="Search lecture titles" className="student-search min-w-0 flex-1" defaultValue={q} placeholder="Search a lecture..."/><input name="topic" aria-label="Syllabus unit code" className="student-search min-w-0 flex-1" defaultValue={topic} placeholder="Syllabus topic code (optional)"/><button className="student-action student-action-primary" type="submit">Filter</button></form>
+ {matches.length?<div className="grid gap-4 md:grid-cols-2">{matches.map(recording=>{const at=progress.get(recording.id)??0;const done=recording.duration_seconds?at>=recording.duration_seconds*.9:false;return <Link href={`/classes/${id}/recordings/${recording.id}`} key={recording.id} className="student-card student-card-hover block overflow-hidden"><div className="flex h-32 items-center justify-center bg-[linear-gradient(125deg,#062a35,#0e5e59)]"><Icon name="play" className="h-9 w-9 text-mint"/></div><div className="p-5"><div className="mb-2 flex items-center justify-between gap-2"><span className="text-[10px] font-extrabold uppercase tracking-widest text-[#0a9d78]">Lesson replay</span><span className="student-chip">{recording.duration_seconds?formatTimestamp(recording.duration_seconds):"Video"}</span></div><h2 className="text-sm font-extrabold text-ink">{recording.title}</h2>{tagsOf(recording).length>0&&<p className="mt-2 line-clamp-2 text-xs text-slate-text">{tagsOf(recording).map(t=>t.title).join(" · ")}</p>}<div className="mt-4 flex items-center justify-between border-t border-line pt-3"><span className="text-[11px] font-bold text-slate-text">{done?"Completed":at?`Resume at ${formatTimestamp(at)}`:"Ready to watch"}</span><span className="text-xs font-bold text-[#0a9a77]">Play →</span></div></div></Link>;})}</div>:<div className="student-card"><BlankState icon="video" title={q||topic?"No matching recordings":"No published recordings yet"} description={q||topic?"Try clearing your filters.":"Your tutor will make videos available after class sessions."} action={q||topic?{href:`/classes/${id}/recordings`,label:"Clear filters"}:undefined}/></div>}
+ </div>;
+}

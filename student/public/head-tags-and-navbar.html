@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mentora™ — Better Learning. Bigger Horizons.</title>
+
+  <!-- 1. MENTORA FAVICON & PWA HEAD TAGS -->
+  <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+  <link rel="shortcut icon" href="/favicons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+  <link rel="manifest" href="/favicons/site.webmanifest" />
+  <meta name="theme-color" content="#062A35" />
+
+  <!-- 2. OPEN GRAPH & SOCIAL SHARING META TAGS -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Mentora™" />
+  <meta property="og:description" content="Better Learning. Bigger Horizons." />
+  <meta property="og:image" content="/social-og/og-image-1200x630.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="/social-og/og-image-1200x630.png" />
+
+  <!-- 3. PLUS JAKARTA SANS GOOGLE FONT & BRAND CSS VARIABLES -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --mentora-midnight-teal: #062A35;
+      --mentora-mint-green:    #19E69A;
+      --mentora-cobalt-blue:   #3B82F6;
+      --mentora-light:         #F5F7FA;
+      --mentora-facet-specular: #4FFFC0;
+      --mentora-facet-royal:    #1D4ED8;
+      --font-mentora: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    body {
+      margin: 0;
+      font-family: var(--font-mentora);
+      background-color: var(--mentora-midnight-teal);
+      color: var(--mentora-light);
+    }
+    .mentora-navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(6, 42, 53, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(25, 230, 154, 0.16);
+    }
+    .mentora-navbar img { height: 44px; width: auto; display: block; }
+    .mentora-cta-btn {
+      background: linear-gradient(135deg, #19E69A 0%, #10B981 100%);
+      color: #062A35;
+      font-family: var(--font-mentora);
+      font-weight: 700;
+      font-size: 0.925rem;
+      padding: 0.65rem 1.35rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header class="mentora-navbar">
+    <a href="/" aria-label="Mentora Home">
+      <img src="logos-svg/mentora-logo-horizontal-dark-bg.svg" alt="Mentora" />
+    </a>
+    <a href="#get-started" class="mentora-cta-btn">Get Started</a>
+  </header>
+</body>
+</html>

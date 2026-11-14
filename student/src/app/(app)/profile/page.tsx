@@ -1,0 +1,29 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { requireUser } from "@/lib/auth";
+import { one } from "@/lib/relations";
+import { getProfileName,listMyMemberships } from "@/features/identity";
+import { getMyClassIds,listVisibleClasses } from "@/features/classes";
+import { PageHeader,Metric,Surface,BlankState } from "@/components/ui/StudentUI";
+import Icon from "@/components/layout/Icon";
+
+export const metadata:Metadata={title:"My Student Profile"};
+export default async function ProfilePage(){
+ const {supabase,user}=await requireUser();
+ const [name,memberships,mine,all,profile,points,coins,groupsRes]=await Promise.all([
+  getProfileName(supabase,user.id),listMyMemberships(supabase),getMyClassIds(supabase,user.id),listVisibleClasses(supabase),
+  supabase.from("profiles").select("phone,created_at").eq("id",user.id).maybeSingle(),
+  supabase.from("mm_points_accounts").select("balance").eq("student_id",user.id).maybeSingle(),
+  supabase.from("mm_coin_accounts").select("balance").eq("student_id",user.id).maybeSingle(),
+  supabase.from("mm_group_members").select("group_id, mm_student_groups(name, grade, description)").eq("student_id",user.id).limit(20)
+ ]);
+ const groups=(groupsRes.data??[]).map((g)=>Array.isArray(g.mm_student_groups)?g.mm_student_groups[0]:g.mm_student_groups).filter(Boolean);
+ const fullName=name??user.email?.split("@")[0]??"Student";
+ const academy=one(memberships.find(m=>m.role==="student")?.organisations??null)?.name??"Mentora Academy";
+ const classes=all.filter(c=>mine.enrolled.has(c.id));
+ return <div className="space-y-6"><PageHeader eyebrow="ACCOUNT / MY PROFILE" title="Student Profile" subtitle="Your academy identity, class access and account information." action={{href:"/settings",label:"Edit settings"}}/>
+ <section className="student-hero flex flex-wrap items-center gap-5 p-7"><span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-mint text-3xl font-extrabold text-deep">{fullName.charAt(0).toUpperCase()}</span><div className="min-w-0"><h2 className="text-2xl font-extrabold">{fullName}</h2><p className="mt-1 break-words text-xs text-[#b1d2dc]">{user.email}</p><span className="mt-3 inline-flex rounded-full border border-mint/30 bg-mint/10 px-3 py-1 text-[10px] font-bold text-mint">STUDENT · {academy}</span></div></section>
+ <div className="grid grid-cols-2 gap-3 xl:grid-cols-4"><Metric label="Enrolled classes" value={classes.length} icon="book" detail="Current enrollments"/><Metric label="Reward points" value={points.error?"—":(points.data?.balance??0)} icon="trophy" detail="Academy rewards"/><Metric label="Mentora coins" value={coins.error?"—":(coins.data?.balance??0)} icon="cash" detail="Wallet balance"/><Metric label="Account role" value="Student" icon="users" detail="Portal access"/></div>
+ <div className="grid gap-5 lg:grid-cols-[minmax(0,1.5fr)_minmax(280px,1fr)]"><div className="space-y-5"><Surface title="Personal details" description="Information associated with your Mentora account"><div className="grid gap-3 sm:grid-cols-2">{[["Full name",fullName],["Email address",user.email??"Not provided"],["Phone",profile.data?.phone??"Not provided"],["Academy",academy],["Joined",profile.data?.created_at?new Date(profile.data.created_at).toLocaleDateString("en-LK"):"Not available"]].map(([label,value])=><div className="rounded-xl border border-line bg-page p-4" key={label}><p className="text-[11px] text-slate-text">{label}</p><p className="mt-1 break-words text-xs font-extrabold text-ink">{value}</p></div>)}</div><Link href="/settings" className="student-action student-action-secondary mt-5"><Icon name="pen" className="h-4 w-4"/>Update profile</Link></Surface>{groups.length>0&&<Surface title="Assigned cohorts & groups" description="Your student group assignments">{<div className="grid gap-2.5 sm:grid-cols-2">{groups.map((g,i)=><div key={i} className="rounded-xl border border-line bg-page p-3.5"><strong className="block text-xs font-bold text-ink">{g.name}</strong><small className="text-[11px] text-slate-text">{g.grade?`Grade: ${g.grade}`:"General group"}</small>{g.description&&<p className="mt-1 text-[11px] text-slate-text">{g.description}</p>}</div>)}</div>}</Surface>}<Surface title="My enrolled courses" link={{href:"/classes",label:"See all"}}>{classes.length?<div className="space-y-2">{classes.map(c=><Link href={`/classes/${c.id}`} key={c.id} className="flex items-center gap-3 rounded-xl border border-line p-3 hover:bg-page"><span className="rounded-lg bg-mint/10 p-2 text-[#07986f]"><Icon name="book" className="h-4 w-4"/></span><span className="min-w-0 flex-1"><strong className="block truncate text-xs text-ink">{c.name}</strong><small className="text-slate-text">{one(c.subjects)?.name??"Course"}</small></span><Icon name="arrow-right" className="h-4 w-4 text-slate-text"/></Link>)}</div>:<BlankState icon="book" title="No enrollments yet" description="Your assigned classes will appear here."/>}</Surface></div><div className="space-y-5"><Surface title="Quick links" description="Your learning and account tools"><div className="space-y-2">{[["Class schedule","/schedule","calendar"],["Study materials","/materials","file"],["My purchases","/purchases","cash"],["Rewards & coins","/rewards","trophy"],["Account settings","/settings","cog"]] .map(([label,href,icon])=><Link key={href} href={href} className="flex items-center justify-between rounded-xl bg-page px-3 py-3 text-xs font-bold text-ink"><span className="flex items-center gap-2"><Icon name={icon as "calendar"|"file"|"cash"|"trophy"|"cog"} className="h-4 w-4 text-[#0a9874]"/>{label}</span><Icon name="arrow-right" className="h-3 w-3"/></Link>)}</div></Surface><Surface title="About your access"><p className="text-xs leading-6 text-slate-text">Your course enrollments, learning materials, purchases and rewards are managed by Mentora staff through the separate manager application.</p></Surface></div></div>
+ </div>;
+}

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <g transform="translate(204,218) scale(1.0)">
+    <polygon points="-117,-172 -20,-50 -82,-88" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-117,-172 -82,-88 -117,-110" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-153,-162 -20,-50 -98,-76" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-153,-162 -98,-76 -150,-108" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-168,70 -124,34 -110,56" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-168,70 -110,56 -80,136" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-124,34 -80,-1 -80,136" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-124,34 -80,136 -110,56" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="42,18 120,-90 78,46" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="120,-90 129,70 78,46" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="42,18 78,46 42,136" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="78,46 129,70 42,136" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-80,-1 -20,-50 -20,6" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-80,-1 -20,6 -20,60" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-184,-142 -126,-45 -168,70" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-184,-142 -20,-50 -126,-45" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-126,-45 -20,-50 -168,70" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-20,-50 72,-124 -20,6" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-20,6 72,-124 166,-188" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-20,60 -20,6 166,-188" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="-20,60 166,-188 42,18" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="42,18 166,-188 120,-90" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="33,-142 166,-188 72,-124" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+    <polygon points="120,-90 166,-188 149,-53" fill="#062A35" stroke="#F5F7FA" stroke-width="3.2" stroke-linejoin="round" />
+  </g>
+</svg>

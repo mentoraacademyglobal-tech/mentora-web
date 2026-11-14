@@ -1,0 +1,11 @@
+node_modules/
+.next/
+.netlify/
+.open-next/
+.wrangler/
+.npm-cache/
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+*.log
